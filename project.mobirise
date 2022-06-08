@@ -30,7 +30,8 @@
       },
       "titlePreset": "Bank",
       "nameSelectPreset": "bank",
-      "presetSourceTheme": "consultingamp"
+      "presetSourceTheme": "consultingamp",
+      "additionalSetColors": []
     },
     "path": "@PROJECT_PATH@",
     "name": "Xure.it",
@@ -48,7 +49,7 @@
       }
     ],
     "imageResize": true,
-    "uniqCompNum": 0,
+    "uniqCompNum": 1,
     "versionPublish": "5.6.5",
     "screenshot": "screenshot.png",
     "chatbutton": {},
@@ -227,111 +228,37 @@
           "_params": {}
         },
         {
+          "alias": false,
           "_styles": {
-            "padding": "0!important",
-            ".mbr-overlay": {
-              "background": "@overlayColor",
-              "opacity": "@overlayOpacity",
-              "pointer-events": "none",
-              "z-index": "1"
+            "& when not (@fullScreen)": {
+              "padding-top": "(@paddingTop * 15px)",
+              "padding-bottom": "(@paddingBottom * 15px)"
             },
-            ".slider-box": {
-              "height": "100%"
-            },
-            ".carousel-img": {
-              "align-self": "flex-start",
-              "position": "relative",
-              "align-items": "center",
-              ".card-box": {
-                "position": "absolute",
-                "z-index": "2",
-                "top": "50%",
-                "transform": "translateY(-50%)"
-              }
-            },
-            ".carousel, .carousel-img, .carousel-img amp-img, .carousel-img amp-img img": {
-              "height": "~\"@{heightImg}rem\"",
-              "width": "100%"
-            },
-            "& when (@fullScreen)": {
-              "align-items": "stretch",
-              ".carousel, .carousel-img amp-img, .carousel-img amp-img img": {
-                "height": "100%"
-              },
-              ".carousel-img, &": {
-                "height": "100vh"
-              }
-            },
-            "img": {
-              "object-fit": "cover"
-            },
-            ".amp-carousel-button": {
-              "width": "(@buttonSize * 5px)",
-              "height": "(@buttonSize * 5px)",
-              "background-color": "@buttonColor",
-              "&:after": {
-                "border-color": "contrast(@buttonColor, darken(@buttonColor, 50%), #ffffff, 60%) !important",
-                "width": "~\"@{buttonSize}px\"",
-                "height": "~\"@{buttonSize}px\""
-              },
-              ".amp-carousel-button-next:after": {
-                "left": "~\"calc(50% - @{buttonSize}px/4)\""
-              },
-              ".amp-carousel-button-prev:after": {
-                "left": "~\"calc(50% + @{buttonSize}px/4)\""
-              }
-            },
-            "amp-carousel when (@effectButton)": {
-              ".amp-carousel-button": {
-                "opacity": "0",
-                "&:after, &": {
-                  "transition": "all 0.3s"
-                }
-              },
-              "&:hover .amp-carousel-button": {
+            "& when (@bg-type = 'color')": {
+              "background-color": "@bg-value",
+              ".mbr-overlay when (@twoBgColor)": {
+                "padding": "0",
+                "background": "@twoColor",
                 "opacity": "1"
-              },
-              ".amp-carousel-button:hover": {
-                "opacity": "0.75",
-                "&:after": {
-                  "width": "(@buttonSize * 1.25px)",
-                  "height": "(@buttonSize * 1.25px)"
-                }
               }
             },
-            "@media (max-width: 767px)": {
-              ".amp-carousel-button": {
-                "display": "none"
+            "& when (@bg-type = 'image')": {
+              "background-image": "url(@bg-value)",
+              ".mbr-overlay": {
+                "background": "@overlayColor",
+                "opacity": "@overlayOpacity"
               }
-            },
-            ".card-box when (@showPadding)": {
-              "@media (min-width: 768px)": {
-                "padding-left": "30px",
-                "padding-right": "30px"
-              },
-              "@media (min-width: 992px)": {
-                "padding-left": "60px",
-                "padding-right": "60px"
-              },
-              "@media (min-width: 1200px)": {
-                "padding-left": "105px",
-                "padding-right": "105px"
-              }
-            },
-            ".mbr-section-btn when (@showSubtitle), (@showTitle), (@showText)": {
-              "padding-top": "45px"
             }
           },
-          "_name": "header6",
-          "_customHTML": "<section class=\"header6 slider\" group=\"Carousels &amp; Sliders\" plugins=\"amp-main, amp-carousel\" mbr-class=\"{'mbr-fullscreen': fullScreen}\">\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n    <header>Size</header>\n    <input type=\"checkbox\" title=\"Full Screen\" name=\"fullScreen\">\n    <input type=\"range\" inline=\"\" title=\"Height Image\" name=\"heightImg\" min=\"10\" max=\"50\" step=\"1\" value=\"44\" condition=\"!fullScreen\">        \n    <header>Show/Hide</header>\n    <input type=\"checkbox\" title=\"Title\" name=\"showTitle\" checked=\"\">\n    <input type=\"checkbox\" title=\"Subtitle\" name=\"showSubtitle\">\n    <input type=\"checkbox\" title=\"Text\" name=\"showText\" checked=\"\">\n    <input type=\"checkbox\" title=\"Buttons\" name=\"showButtons\" checked=\"\">\n    <select title=\"Align\" name=\"alignTitle\" condition=\"showTitle || showSubtitle || showText || showButtons\">\n        <option value=\"1\" selected=\"\">Left</option>\n        <option value=\"2\">Center</option>\n        <option value=\"3\">Right</option>\n    </select>\n        <input type=\"checkbox\" title=\"Autoplay\" name=\"autoplay\">\n        <input type=\"range\" inline=\"\" title=\"Delay\" name=\"delay\" min=\"1000\" max=\"5000\" step=\"1000\" value=\"3000\" condition=\"autoplay\">\n        <select title=\"Images\" name=\"imagesAmount\">\n            <option value=\"2\" selected=\"\">2</option>\n            <option value=\"3\">3</option>\n            <option value=\"4\">4</option>\n            <option value=\"5\">5</option>\n            <option value=\"6\">6</option>\n        </select>\n    <input type=\"checkbox\" title=\"Padding Text\" name=\"showPadding\" checked=\"\">   \n    <input type=\"checkbox\" title=\"Effect Carousel Button\" name=\"effectButton\" checked=\"\">\n    <input type=\"color\" title=\"Carousel Button Color\" name=\"buttonColor\" value=\"#00b4da\">\n    <input type=\"range\" inline=\"\" title=\"Carousel Button Size\" name=\"buttonSize\" min=\"8\" max=\"20\" step=\"1\" value=\"12\">\n    <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" checked=\"\">\n    <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#194f82\" condition=\"overlay\">\n    <input type=\"range\" inline=\"\" title=\"Overlay Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.6\" condition=\"overlay\">\n    <!-- End block parameters -->\n    </mbr-parameters>\n    <div class=\"container-fluid\">\n        <div class=\"mbr-overlay\" mbr-if=\"overlay\"></div>\n        <div class=\"slider-box\" data-autoplay=\"{{autoplay}}\" data-delay=\"{{delay}}\"><amp-carousel class=\"carousel\" height=\"9\" width=\"16\" layout=\"responsive\" type=\"slides\" loop=\"\"><div class=\"carousel-img mobirise-loader mbr-flex mbr-jc-c\">\n                    <amp-img src=\"@PROJECT_PATH@/assets/images/b03.jpg\" height=\"9\" width=\"13.5\" layout=\"responsive\" alt=\"Mobirise\">\n                        <div placeholder=\"\" class=\"placeholder\"></div>\n                        <img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/b03.jpg\" alt=\"Mobirise\" title=\"\">\n                    </amp-img>\n                    <div class=\"card-box container\" mbr-class=\"{'align-center': alignTitle == 2, 'align-right': alignTitle == 3}\">\n                        <h2 class=\"mbr-section-subtitle mbr-fonts-style mbr-white\" mbr-theme-style=\"display-5\" mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle, .mbr-section-btn\">Header with slider Subtitle</h2>\n                        <h1 class=\"mbr-section-title mbr-fonts-style mbr-bold mbr-white\" mbr-class=\"{'mbr-pb-1': showText}\" mbr-theme-style=\"display-1\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title, .mbr-section-btn\">Xure.it la prima Agenzia di asiscurazioni italiana completamente online</h1>\n                        <p class=\"mbr-text mbr-fonts-style mbr-white\" mbr-theme-style=\"display-6\" mbr-if=\"showText\" data-app-selector=\".mbr-section-btn, .mbr-text\">Whether you're looking for side-by-side comparisons,<br>info around rewards versus points or you're ready<br> to apply, we've gathered everything you<br> need in one easy place.</p>\n                        <div mbr-buttons=\"\" class=\"mbr-section-btn\" mbr-theme-style=\"display-4\" data-toolbar=\"-mbrBtnMove\" mbr-if=\"showButtons\"><a class=\"btn btn-md btn-success\" data-app-placeholder=\"Type Text\"><span class=\"fa fa-check-circle mbr-iconfont mbr-iconfont-btn\"></span>LEARN MORE</a></div>\n                    </div>    \n                </div><div class=\"carousel-img mobirise-loader mbr-flex mbr-jc-c\" mbr-if=\"imagesAmount > 1\">\n                    <amp-img src=\"@PROJECT_PATH@/assets/images/b01.jpg\" height=\"9\" width=\"13.5\" layout=\"responsive\" alt=\"Mobirise\">\n                        <div placeholder=\"\" class=\"placeholder\"></div>\n                        <img class=\"mbr-temp\" src=\"@PROJECT_PATH@/assets/images/b01.jpg\" alt=\"Mobirise\" title=\"\">\n                    </amp-img>\n                    <div class=\"card-box container\" mbr-class=\"{'align-center': alignTitle == 2, 'align-right': alignTitle == 3}\">\n                        <h2 class=\"mbr-section-subtitle mbr-fonts-style mbr-white\" mbr-theme-style=\"display-5\" mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle, .mbr-section-btn\">Header with slider Subtitle</h2>\n                        <h1 class=\"mbr-section-title mbr-fonts-style mbr-bold mbr-white\" mbr-class=\"{'mbr-pb-1': showText}\" mbr-theme-style=\"display-1\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title, .mbr-section-btn\">New!</h1>\n                        <p class=\"mbr-text mbr-fonts-style mbr-white\" mbr-theme-style=\"display-6\" mbr-if=\"showText\" data-app-selector=\".mbr-section-btn, .mbr-text\">Earn 50,000 bonus points<br>after spending $3,000<br>in the first 5 months.</p>\n                        <div mbr-buttons=\"\" class=\"mbr-section-btn\" mbr-theme-style=\"display-4\" data-toolbar=\"-mbrBtnMove\" mbr-if=\"showButtons\"><a class=\"btn btn-md btn-success\" data-app-placeholder=\"Type Text\"><span class=\"fa fa-check-circle mbr-iconfont mbr-iconfont-btn\"></span>LEARN MORE</a></div>\n                    </div>    \n                </div></amp-carousel>\n            \n        </div>\n    </div>\n</section>",
-          "_cid": "r5iKYi8ROn",
-          "_anchor": "header6-1",
-          "_PHPplaceholders": [],
-          "_JSplaceholders": [],
+          "_name": "header1",
+          "_sourceTheme": "consultingamp",
+          "_customHTML": "<section class=\"header1\" group=\"Headers\" mbr-class=\"{'mbr-fullscreen': fullScreen}\" plugins=\"amp-main\">\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n    <header>Size</header>\n    <input type=\"checkbox\" title=\"Full Screen\" name=\"fullScreen\">\n    <input type=\"checkbox\" title=\"Full Width\" name=\"fullWidth\">\n    <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"10\" step=\"1\" value=\"10\" condition=\"fullScreen == false\">\n    <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"10\" step=\"1\" value=\"10\" condition=\"fullScreen == false\">\n    <header>Show/Hide</header>\n    <input type=\"checkbox\" title=\"Title\" name=\"showTitle\" checked>\n    <input type=\"checkbox\" title=\"Subtitle\" name=\"showSubtitle\">\n    <input type=\"checkbox\" title=\"Text\" name=\"showText\" checked>\n    <input type=\"checkbox\" title=\"Buttons\" name=\"showButtons\" checked>\n    <select title=\"Align\" name=\"alignTitle\" condition=\"showTitle || showSubtitle || showText || showButtons\">\n        <option value=\"1\">Left</option>\n        <option value=\"2\" selected>Center</option>\n        <option value=\"3\">Right</option>\n    </select>\n    <header>Background</header>\n    <input type=\"checkbox\" title=\"2 Background Color\" name=\"twoBgColor\" condition=\"bg.type == 'color'\" checked> \n    <input type=\"range\" inline title=\"Width 2 Bg\" name=\"width2Bg\" min=\"1\" max=\"5\" step=\"1\" value=\"4\" condition=\"twoBgColor && bg.type == 'color'\">    \n    <fieldset type=\"background\" name=\"bg\">\n        <input type=\"image\" title=\"Background Image\" value=\"../_images/background1.jpg\">\n        <input type=\"color\" title=\"Background Color\" value=\"#273272\" selected>\n    </fieldset>\n    <input type=\"color\" title=\"2 Color\" name=\"twoColor\" value=\"#7480a5\" condition=\"twoBgColor && bg.type == 'color'\">  \n    <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type !== 'color'\" checked>\n    <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#273272\" condition=\"overlay && bg.type !== 'color'\">\n    <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.6\" condition=\"overlay && bg.type !== 'color'\">\n    <!-- End block parameters -->\n    </mbr-parameters>\n    <div class=\"mbr-overlay\" mbr-if=\"(overlay && bg.type !== 'color') || (twoBgColor && bg.type == 'color')\" mbr-class=\"{'mbr-col-md-4': width2Bg == 1 && twoBgColor && bg.type == 'color',\n                     'mbr-col-md-5': width2Bg == 2 && twoBgColor && bg.type == 'color',\n                     'mbr-col-md-6': width2Bg == 3 && twoBgColor && bg.type == 'color',\n                     'mbr-col-md-7': width2Bg == 4 && twoBgColor && bg.type == 'color',\n                     'mbr-col-md-8': width2Bg == 5 && twoBgColor && bg.type == 'color'}\"></div>\n    <div mbr-class=\"{'container':!fullWidth,\n                     'container-fluid': fullWidth}\">\n        <div class=\"title\" mbr-class=\"{'align-left': alignTitle==1,\n                        'align-center': alignTitle==2,\n                        'align-right': alignTitle==3, 'mbr-px-2': fullWidth}\" mbr-if=\"showTitle || showSubtitle || showText || showButtons\">\n            <h1 class=\"mbr-section-title mbr-fonts-style mbr-semibold mbr-white\" mbr-class=\"{'mbr-pb-2': showSubtitle || showText}\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title\">Xure.it la prima Agenzia di assicurazioni italiana completamente online</h1>\n            <h2 class=\"mbr-section-subtitle mbr-fonts-style mbr-white\" mbr-theme-style=\"display-6\" mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle\" mbr-class=\"{'mbr-pb-2': showText}\">\n                Sell your Product without selling your Product\n            </h2>\n            <p class=\"mbr-text mbr-fonts-style mbr-semibold mbr-white\" mbr-theme-style=\"display-4\" mbr-if=\"showText\" data-app-selector=\".mbr-text\">\n                Lorem ipsum dolor sit amet, consectetur adipisicing elit.\n            </p>\n            <div mbr-buttons class=\"mbr-section-btn\" mbr-class=\"{'mbr-pt-3':showSubtitle||showTitle||showText}\" mbr-theme-style=\"display-4\" data-toolbar=\"-mbrBtnMove\" mbr-if=\"showButtons\"><a class=\"btn-primary btn btn-md\" data-app-placeholder=\"Type Text\">\n                    LEARN HOW</a></div>\n        </div>\n    </div>\n</section>",
+          "_cid": "t8b11qAtpI",
           "_protectedParams": [],
           "_global": false,
           "_once": false,
-          "_params": {}
+          "_params": {},
+          "_anchor": "header1-0"
         },
         {
           "_styles": {
